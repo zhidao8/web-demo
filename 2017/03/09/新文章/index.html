@@ -5,28 +5,22 @@
   
   <title>《真正的中国天气api接口xml，json》详解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言某天想写个天气软件，于是上网找找有没有免费的天气 API 。发现许多的API不是收费，就是不能用了（心塞塞）。最后找到这篇文章真正的中国天气api接口xml，json（求加精） … 心里那个高兴啊，终于找到一个能用的天气 API 了。用浏览器试了一下，确实不错，作者晒出的API都是能用的。于是便写代码捣鼓解析 API 返回的 xml
-
-问题代码如下12345678910111213141516">
+  <meta name="description" content="前言某天想写个天气软件，于是上网找找有没有免费的天气 API 。发现许多的API不是收费，就是不能用了（心塞塞）。最后找到这篇文章真正的中国天气api接口xml，json（求加精） … 心里那个高兴啊，终于找到一个能用的天气 API 了。用浏览器试了一下，确实不错，作者晒出的API都是能用的。于是便写代码捣鼓解析 API 返回的 xml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《真正的中国天气api接口xml，json》详解">
 <meta property="og:url" content="http://yoursite.com/2017/03/09/新文章/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言某天想写个天气软件，于是上网找找有没有免费的天气 API 。发现许多的API不是收费，就是不能用了（心塞塞）。最后找到这篇文章真正的中国天气api接口xml，json（求加精） … 心里那个高兴啊，终于找到一个能用的天气 API 了。用浏览器试了一下，确实不错，作者晒出的API都是能用的。于是便写代码捣鼓解析 API 返回的 xml
-
-问题代码如下12345678910111213141516">
+<meta property="og:description" content="前言某天想写个天气软件，于是上网找找有没有免费的天气 API 。发现许多的API不是收费，就是不能用了（心塞塞）。最后找到这篇文章真正的中国天气api接口xml，json（求加精） … 心里那个高兴啊，终于找到一个能用的天气 API 了。用浏览器试了一下，确实不错，作者晒出的API都是能用的。于是便写代码捣鼓解析 API 返回的 xml">
 <meta property="og:image" content="http://img.blog.csdn.net/20170302201000936?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170302201100146?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170302201202015?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170302201940395?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170302201620331?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170302201640878?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-03-09T12:57:55.122Z">
+<meta property="og:updated_time" content="2017-03-09T13:14:29.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《真正的中国天气api接口xml，json》详解">
-<meta name="twitter:description" content="前言某天想写个天气软件，于是上网找找有没有免费的天气 API 。发现许多的API不是收费，就是不能用了（心塞塞）。最后找到这篇文章真正的中国天气api接口xml，json（求加精） … 心里那个高兴啊，终于找到一个能用的天气 API 了。用浏览器试了一下，确实不错，作者晒出的API都是能用的。于是便写代码捣鼓解析 API 返回的 xml
-
-问题代码如下12345678910111213141516">
+<meta name="twitter:description" content="前言某天想写个天气软件，于是上网找找有没有免费的天气 API 。发现许多的API不是收费，就是不能用了（心塞塞）。最后找到这篇文章真正的中国天气api接口xml，json（求加精） … 心里那个高兴啊，终于找到一个能用的天气 API 了。用浏览器试了一下，确实不错，作者晒出的API都是能用的。于是便写代码捣鼓解析 API 返回的 xml">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170302201000936?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -65,9 +59,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -100,6 +94,7 @@
       
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>某天想写个天气软件，于是上网找找有没有免费的天气 API 。发现许多的API不是收费，就是不能用了（心塞塞）。最后找到这篇文章<br><a href="http://blog.csdn.net/fancylovejava/article/details/26102635" target="_blank" rel="external">真正的中国天气api接口xml，json（求加精） … </a><br>心里那个高兴啊，终于找到一个能用的天气 API 了。<br>用浏览器试了一下，确实不错，作者晒出的API都是能用的。于是便写代码捣鼓解析 API 返回的 xml</p>
 <hr>
+<a id="more"></a>
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherApiDataGetter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// xmlContent 用来存储 API 返回的 xml 中的所有内容</span></div><div class="line">        StringBuilder xmlContent = <span class="keyword">new</span> StringBuilder();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 将 API 地址包装成 URL</span></div><div class="line">            <span class="comment">// 101010100 是北京的城市代码</span></div><div class="line">            URL weatherUrl = <span class="keyword">new</span> URL(<span class="string">"http://wthrcdn.etouch.cn/WeatherApi?citykey=101010100"</span>);</div><div class="line">            <span class="comment">// 获取 URL 连接</span></div><div class="line">            URLConnection urlConnection = weatherUrl.openConnection();</div><div class="line">            <span class="comment">// 获取 URL 连接的输入流对象，以 UTF-8 的编码格式打开流，</span></div><div class="line">            <span class="comment">// 并包装成 BufferedReader 对象以提高读取速率</span></div><div class="line">            BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(</div><div class="line">                <span class="keyword">new</span> InputStreamReader(urlConnection.getInputStream(), <span class="string">"UTF-8"</span>)</div><div class="line">            );</div><div class="line">            <span class="comment">// 读取流中的所有内容</span></div><div class="line">            String line;</div><div class="line">            <span class="keyword">while</span> ((line = bufferedReader.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">                xmlContent.append(line);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 输出 xml 中的所有内容</span></div><div class="line">        System.out.println(xmlContent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>结果<br><img src="http://img.blog.csdn.net/20170302201000936?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>没错，乱码</p>
 <p>好吧，我们换一种编码试试，换成 GBK 编码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 URL 连接的输入流对象，以 GBK 的编码格式打开流，</span></div><div class="line"><span class="comment">// 并包装成 BufferedReader 对象以提高读取速率</span></div><div class="line">BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(</div><div class="line">    <span class="keyword">new</span> InputStreamReader(urlConnection.getInputStream(), <span class="string">"GBK"</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
@@ -144,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/09/新文章/" data-id="cj02edck000014co2sy9g11vp" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/03/09/新文章/" data-id="cj02f0ytx00013so2ap39oo14" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -155,7 +150,7 @@
   
   
     <a href="/2017/03/08/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">Hello World</div>
     </a>
   
@@ -178,7 +173,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
     </div>
@@ -188,7 +183,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
@@ -213,7 +208,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
