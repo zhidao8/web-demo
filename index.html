@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-新文章" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/09/新文章/" class="article-date">
+  <time datetime="2017-03-09T12:55:56.000Z" itemprop="datePublished">2017-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/09/新文章/">《真正的中国天气api接口xml，json》详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>某天想写个天气软件，于是上网找找有没有免费的天气 API 。发现许多的API不是收费，就是不能用了（心塞塞）。最后找到这篇文章<br><a href="http://blog.csdn.net/fancylovejava/article/details/26102635" target="_blank" rel="external">真正的中国天气api接口xml，json（求加精） … </a><br>心里那个高兴啊，终于找到一个能用的天气 API 了。<br>用浏览器试了一下，确实不错，作者晒出的API都是能用的。于是便写代码捣鼓解析 API 返回的 xml</p>
+<hr>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherApiDataGetter</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// xmlContent 用来存储 API 返回的 xml 中的所有内容</span></div><div class="line">        StringBuilder xmlContent = <span class="keyword">new</span> StringBuilder();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 将 API 地址包装成 URL</span></div><div class="line">            <span class="comment">// 101010100 是北京的城市代码</span></div><div class="line">            URL weatherUrl = <span class="keyword">new</span> URL(<span class="string">"http://wthrcdn.etouch.cn/WeatherApi?citykey=101010100"</span>);</div><div class="line">            <span class="comment">// 获取 URL 连接</span></div><div class="line">            URLConnection urlConnection = weatherUrl.openConnection();</div><div class="line">            <span class="comment">// 获取 URL 连接的输入流对象，以 UTF-8 的编码格式打开流，</span></div><div class="line">            <span class="comment">// 并包装成 BufferedReader 对象以提高读取速率</span></div><div class="line">            BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(</div><div class="line">                <span class="keyword">new</span> InputStreamReader(urlConnection.getInputStream(), <span class="string">"UTF-8"</span>)</div><div class="line">            );</div><div class="line">            <span class="comment">// 读取流中的所有内容</span></div><div class="line">            String line;</div><div class="line">            <span class="keyword">while</span> ((line = bufferedReader.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">                xmlContent.append(line);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 输出 xml 中的所有内容</span></div><div class="line">        System.out.println(xmlContent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结果<br><img src="http://img.blog.csdn.net/20170302201000936?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>没错，乱码</p>
+<p>好吧，我们换一种编码试试，换成 GBK 编码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 URL 连接的输入流对象，以 GBK 的编码格式打开流，</span></div><div class="line"><span class="comment">// 并包装成 BufferedReader 对象以提高读取速率</span></div><div class="line">BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(</div><div class="line">    <span class="keyword">new</span> InputStreamReader(urlConnection.getInputStream(), <span class="string">"GBK"</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>结果<br><img src="http://img.blog.csdn.net/20170302201100146?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>还是不行诶</p>
+<p>好吧，我们再试一种编码吧，这次是 Unicode 编码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 URL 连接的输入流对象，以 Unicode 的编码格式打开流，</span></div><div class="line"><span class="comment">// 并包装成 BufferedReader 对象以提高读取速率</span></div><div class="line">BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(</div><div class="line">    <span class="keyword">new</span> InputStreamReader(urlConnection.getInputStream(), <span class="string">"Unicode"</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>结果<br><img src="http://img.blog.csdn.net/20170302201202015?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>纠结……<br>为什么浏览器可以，我直接读取又不可以？一定是我的大家方式不对</p>
+<hr>
+<h3 id="探索"><a href="#探索" class="headerlink" title="探索"></a>探索</h3><p>既然浏览器可以查看 API 返回的 xml ，那肯定用了什么特殊的方法  </p>
+<p>我们来尝试着研究一下</p>
+<p>首先，从浏览器打开 API 网址<br> <a href="http://wthrcdn.etouch.cn/WeatherApi?citykey=101010100" target="_blank" rel="external">http://wthrcdn.etouch.cn/WeatherApi?citykey=101010100</a>  </p>
+<p><img src="http://img.blog.csdn.net/20170302201940395?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="">  </p>
+<p>其次，我们打开浏览器后按 <code>F12</code> 打开浏览器的<strong>开发者工具</strong>（我这里用的是<strong>360极速浏览器</strong>，可能其他的浏览器快捷键不一样）。<br>再次，点击 <code>Netword</code> 选项。这个选项可以记录浏览器在打开网页时的所有的行为。<br>然后，我们刷新一下网址，这样就能把浏览器的行为记录下来了</p>
+<p>结果<br><img src="http://img.blog.csdn.net/20170302201620331?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">  </p>
+<p>很好，浏览器做的事很简单，先选择第一个。看名字就知道，这个是我们刚刚打开的网址。<br>选择右边的 <code>Headers</code> ，我们一行一行地研究，于是发现这行</p>
+<blockquote>
+<p>Content-Encoding:gzip  </p>
+</blockquote>
+<p>原来 API 返回的是 <strong>gzip</strong> 格式的文件，这样就终于知道自己获取的流为什么乱码了。</p>
+<p>了解更多关于浏览器 <code>F12</code> 的 <code>Netword</code> 选项</p>
+<ul>
+<li><a href="https://www.baidu.com/baidu?&amp;ie=utf-8&amp;word=%E6%A8%A1%E6%8B%9F%E6%B5%8F%E8%A7%88%E5%99%A8%E7%99%BB%E9%99%86" target="_blank" rel="external">模拟浏览器登陆 - 百度搜索</a></li>
+</ul>
+<p>关于 <strong>gzip</strong> 格式的简单介绍</p>
+<ul>
+<li><a href="http://blog.csdn.net/wh_19910525/article/details/8112656" target="_blank" rel="external">gzip 小结</a></li>
+</ul>
+<hr>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>我们重新改改代码，把流对象用 GZIPInputStream 包装一下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 URL 连接的输入流对象，然后包装成 GZIPInputStream 对象，</span></div><div class="line"><span class="comment">// 再包装成 BufferedReader 对象以提高读取速率</span></div><div class="line">BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(</div><div class="line">    <span class="keyword">new</span> InputStreamReader(</div><div class="line">        <span class="keyword">new</span> GZIPInputStream(urlConnection.getInputStream())<span class="comment">/*, "UTF-8"*/</span> <span class="comment">// 实测可以不指定编码方式</span></div><div class="line">    )</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>结果<br><img src="http://img.blog.csdn.net/20170302201640878?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvemhpZGFvOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>嗯，这下总算是正确了</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>剩下的就是解析了 xml 了。<br>另外，城市代码可以参考如下网址  </p>
+<ul>
+<li><a href="http://cj.weather.com.cn/support/Detail.aspx?id=51837fba1b35fe0f8411b6df" target="_blank" rel="external">城市ID列表</a>  </li>
+</ul>
+<p>实测部分城市不可用。具体可以自己去折腾折腾，当然也可以下载下面的示例  </p>
+<p><a href="">下载</a>包含以下内容的示例</p>
+<ul>
+<li>通过城市代码获取 xml 文本</li>
+<li>解析 xml 内容</li>
+<li>所有可用城市列表</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/09/新文章/" data-id="cj02edck000014co2sy9g11vp" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/08/hello-world/" class="article-date">
+  <time datetime="2017-03-08T02:51:08.550Z" itemprop="datePublished">2017-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/08/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/08/hello-world/" data-id="cj02edck000004co2p4wogsfp" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/09/新文章/">《真正的中国天气api接口xml，json》详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/08/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
