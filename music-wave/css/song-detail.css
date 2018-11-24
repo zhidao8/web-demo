@@ -8,6 +8,7 @@ p {
   margin: 1em;
   line-height: 1.5em;
   text-align: left;
+  font-weight: 100;
 }
 
 @media screen and (max-width: 600px) {
