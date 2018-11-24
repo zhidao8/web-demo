@@ -1,0 +1,113 @@
+
+h1 {
+  font-size: 28px;
+}
+
+p {
+  font-size: 24px;
+  margin: 1em;
+  line-height: 1.5em;
+  text-align: left;
+}
+
+p:first-letter {
+  font-size: 2em;
+  float: left;
+  margin-right: .1em;
+  line-height: 1.5em;
+}
+
+audio {
+  display: none;
+}
+
+body {
+  position: unset;
+}
+
+.center-content {
+  margin: 80px auto 20px;
+}
+
+.song-name {
+  margin: 32px 0;
+  font-size: 32px;
+  display: block;
+}
+
+.cover-wrap {
+  position: relative;
+}
+
+.cover-wrap.playing {
+  animation: rotation 36s linear infinite;
+  display: inline-block;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cover {
+  width: 320px;
+  height: 320px;
+}
+
+.cover-in-circle {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+  border: #888 solid 1px;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.cover-out-circle {
+  width: 80px;
+  height: 80px;
+  border: solid rgba(255, 255, 255, .3) 8px;
+  border-radius: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.hover-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, .5);
+}
+
+.hover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.hover-wrap .play-btn {
+  width: 80px;
+  height: 80px;
+}
+
+.hover-wrap.playing {
+  display: none;
+}
