@@ -4,7 +4,7 @@ body, ol, ul, h1, h2, h3, h4, h5, h6, p, th, td, dl, dd, form, fieldset, legend,
 }
 
 body {
-  font: 12px "等线", "宋体", "Arial Narrow", HELVETICA;
+  font: 12px "serif","sans-serif", "cursive";
   background: #fff;
   -webkit-text-size-adjust: 100%;
 }
@@ -45,6 +45,12 @@ body {
   overflow: auto;
 }
 
+@media screen and (max-width: 600px) {
+  .content {
+    align-items: start;
+  }
+}
+
 .center-content {
   display: block;
   width: 900px;
@@ -72,6 +78,7 @@ a.song-link:hover .cover {
 
 a.song-link:hover .song-name {
   color: #ffffff;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, .4);
 }
 
 .cover {
