@@ -4,58 +4,53 @@ body, ol, ul, h1, h2, h3, h4, h5, h6, p, th, td, dl, dd, form, fieldset, legend,
 }
 
 body {
-  font: 12px "serif","sans-serif", "cursive";
+  font: 16px "serif", "sans-serif", "cursive";
   background: #fff;
-  -webkit-text-size-adjust: 100%;
 }
 
 li {
   list-style: none
 }
 
-img {
-  border: 0;
-  vertical-align: middle
-}
-
 p {
   word-wrap: break-word
 }
 
-body {
-  height: 100%;
+html, body {
   width: 100%;
-  position: fixed;
+  height: 100%;
 }
 
-.bg {
+body {
+  position: relative;
+  background: url("../image/bg.jpg") right center no-repeat;
+  background-size: cover;
+}
+
+body:before {
+  content: "";
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  position: fixed;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: inherit;
   filter: blur(2px);
   z-index: -100;
 }
 
 .content {
   display: flex;
-  align-items: center;
   width: 100%;
   height: 100%;
   overflow: auto;
-}
-
-@media screen and (max-width: 600px) {
-  .content {
-    align-items: start;
-  }
 }
 
 .center-content {
   display: block;
   width: 900px;
   text-align: center;
-  margin: 40px auto;
+  margin: auto;
 }
 
 .covers li {
@@ -88,6 +83,7 @@ a.song-link:hover .song-name {
   border-radius: 160px;
   width: 160px;
   height: 160px;
+  object-fit: cover;
   transition: all .3s;
 }
 

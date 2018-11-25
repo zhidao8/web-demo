@@ -1,23 +1,16 @@
-
-h1 {
+.content h1 {
   font-size: 28px;
 }
 
-p {
+.content p {
   font-size: 24px;
   margin: 1em;
   line-height: 1.5em;
   text-align: left;
-  font-weight: 100;
+  font-weight: lighter;
 }
 
-@media screen and (max-width: 600px) {
-  p {
-    font-size: 16px;
-  }
-}
-
-p:first-letter {
+.content p:first-letter {
   font-size: 2em;
   float: left;
   margin-right: .1em;
@@ -28,12 +21,8 @@ audio {
   display: none;
 }
 
-body {
-  position: static;
-}
-
 .center-content {
-  margin: 80px auto 20px;
+  padding: 1rem;
 }
 
 .song-name {
@@ -117,4 +106,23 @@ body {
 
 .hover-wrap.playing {
   display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .content p {
+    font-size: 18px;
+  }
+
+  .content h1 {
+    font-size: 20px;
+  }
+
+  .content .song-name {
+    font-size: 22px;
+  }
+
+  .cover {
+    width: 280px;
+    height: 280px;
+  }
 }
