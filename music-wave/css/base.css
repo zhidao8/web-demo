@@ -80,7 +80,7 @@ a.song-link:hover .song-name {
   display: block;
   margin: auto;
   border: solid rgba(255, 255, 255, .5) 3px;
-  border-radius: 160px;
+  border-radius: 50%;
   width: 160px;
   height: 160px;
   object-fit: cover;
