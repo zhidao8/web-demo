@@ -1,10 +1,10 @@
 .content h1 {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .content p {
-  font-size: 24px;
-  margin: 1em;
+  font-size: 22px;
+  margin: 1em 0;
   line-height: 1.5em;
   text-align: left;
   font-weight: lighter;
@@ -26,16 +26,16 @@ audio {
 }
 
 .song-name {
-  margin: 32px 0;
-  font-size: 32px;
+  margin: 1em 0;
+  font-size: 28px;
   display: block;
 }
 
-.cover-wrap {
+.disc {
   position: relative;
 }
 
-.cover-wrap.playing {
+.disc.playing {
   animation: rotation 36s linear infinite;
   display: inline-block;
 }
@@ -58,7 +58,7 @@ audio {
   position: absolute;
   width: 40px;
   height: 40px;
-  border-radius: 100px;
+  border-radius: 50%;
   top: 50%;
   left: 50%;
   background: #fff;
@@ -70,43 +70,57 @@ audio {
   width: 80px;
   height: 80px;
   border: solid rgba(255, 255, 255, .3) 8px;
-  border-radius: 100px;
+  border-radius: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
 
+.disc-holder {
+  display: inline-block;
+  position: relative;
+}
+
 .hover-wrap {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, .5);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .3);
 }
 
 .hover {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   cursor: pointer;
+  border-radius: 50%;
+  z-index: 100;
+}
+
+.hover-wrap.playing {
+  background: transparent;
 }
 
 .hover-wrap .play-btn {
   color: #fff;
   font-size: 40px;
   text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-42%, -50%);
+  transition: all .3s;
 }
 
-.hover-wrap.playing {
-  display: none;
+.hover-wrap.playing .play-btn {
+  visibility: hidden;
 }
 
 @media screen and (max-width: 600px) {
