@@ -1,45 +1,96 @@
 document.addEventListener('DOMContentLoaded', function () {
+  ;(function () {
+    var canvas = document.querySelector('.cover')
+
+    var style = window.getComputedStyle(canvas)
+    canvas.width = Number(style.width.slice(0, style.width.length - 2))
+    canvas.height = Number(style.height.slice(0, style.height.length - 2))
+    var context = canvas.getContext("2d")
+    var image = new Image()
+    image.src = canvas.dataset.imgSrc
+
+    image.addEventListener('load', function () {
+      var halfCoverSize = canvas.width / 2
+
+      context.drawImage(image, 0, 0, canvas.width, canvas.height)
+
+      context.globalCompositeOperation = 'destination-out'
+      context.beginPath()
+      context.arc(halfCoverSize, halfCoverSize, 20, 0, Math.PI * 2, false)
+      context.fill()
+
+      context.globalCompositeOperation = 'destination-in'
+      context.beginPath()
+      context.arc(halfCoverSize, halfCoverSize, halfCoverSize, 0, Math.PI * 2, false)
+      context.fill()
+      context.clip()
+
+      context.globalCompositeOperation = 'source-over'
+      context.strokeStyle = 'rgba(255, 255, 255, .3)'
+      context.lineWidth = 3
+      context.beginPath()
+      context.arc(halfCoverSize, halfCoverSize, 20, 0, Math.PI * 2, false)
+      context.stroke()
+    })
+  })()
 
   var pingingClass = 'playing'
   var isPlaying = false
+  var rotatableDisc = (function () {
+    var rotateDeg = 0
+    var disc = document.querySelector('.disc')
+    var playing = false
 
-  var bgMusic = document.getElementsByClassName('bg-music')[0];
+    return {
+      startRotate: function () {
+        playing = true
+        window.requestAnimationFrame(function callback() {
+          rotateDeg += 0.1
+          disc.style.transform = 'rotate(' + rotateDeg + 'deg)'
+          if (playing) {
+            window.requestAnimationFrame(callback)
+          }
+        })
+      },
+
+      pauseRotate: function () {
+        playing = false
+      },
+    }
+  })()
+
+  var bgMusic = document.querySelector('.bg-music')
+  bgMusic.volume = 0.5
 
   bgMusic.addEventListener('canplay', function () {
 
     bgMusic.addEventListener('play', function () {
-      var hoverWrap = document.getElementsByClassName('hover-wrap')[0];
-      hoverWrap.classList.add(pingingClass);
-      hoverWrap = null;
+      var hoverWrap = document.querySelector('.hover-wrap')
+      hoverWrap.classList.add(pingingClass)
 
-      var coverWrap = document.getElementsByClassName('disc')[0];
-      coverWrap.classList.add(pingingClass);
-      coverWrap = null;
+      rotatableDisc.startRotate()
 
       isPlaying = true
     })
 
     bgMusic.addEventListener('pause', function () {
-      var hoverWrap = document.getElementsByClassName('hover-wrap')[0];
-      hoverWrap.classList.remove(pingingClass);
-      hoverWrap = null;
+      var hoverWrap = document.querySelector('.hover-wrap')
+      hoverWrap.classList.remove(pingingClass)
 
-      var coverWrap = document.getElementsByClassName('disc')[0];
-      coverWrap.classList.remove(pingingClass);
-      coverWrap = null;
+      rotatableDisc.pauseRotate()
 
       isPlaying = false
     })
 
-    var hover = document.getElementsByClassName('hover')[0];
+    var hover = document.querySelector('.hover')
     hover.addEventListener('click', function () {
       if (isPlaying) {
-        bgMusic.pause();
+        bgMusic.pause()
       } else {
-        bgMusic.play();
+        bgMusic.play()
       }
     })
-    hover = null;
+    hover = null
 
   })
 
