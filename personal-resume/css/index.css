@@ -1,0 +1,90 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: calc(6vw / 340 * 100);
+  line-height: calc(10vw / 340 * 100);
+  font-family: DengXian, sans-serif;
+  padding: calc(21vw / 340 * 100);
+}
+
+h1 {
+  font-size: calc(17vw / 340 * 100);
+  background: #E5E5E5;
+  padding: calc(7vw / 340 * 100);
+  text-align: center;
+}
+
+.personal_info_block {
+  padding: 0 calc(53vw / 340 * 100) 0 0;
+  position: relative;
+  margin: calc(4vw / 340 * 100) 0;
+}
+
+.personal_info_block table th {
+  width: calc(40vw / 340 * 100);
+  text-align: center;
+}
+
+.personal_info_block table td {
+  padding: 0 calc(4vw / 340 * 100);
+}
+
+.personal_info_block img {
+  width: calc(51vw / 340 * 100);
+  height: calc(67vw / 340 * 100);
+  object-fit: cover;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0 calc(2vw / 340 * 100) 0 0;
+}
+
+.block {
+  margin: calc(6vw / 340 * 100) 0 calc(2vw / 340 * 100);
+}
+
+h2 {
+  background: #E5E5E5;
+  margin: 0 0 calc(3vw / 340 * 100) 0;
+}
+
+h2 ~ div {
+  margin: 0 calc(3vw / 340 * 100);
+}
+
+h2::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+h2 > b {
+  background: #646464;
+  color: white;
+  padding: 0 calc(5vw / 340 * 100);
+  font-size: calc(8vw / 340 * 100);
+  line-height: calc(12vw / 340 * 100);
+  display: block;
+  float: left;
+}
+
+.block table {
+  width: 100%;
+}
+
+.block ul li {
+  list-style: none;
+}
+
+.block ul li::before {
+  content: "";
+  display: inline-block;
+  width: calc(3.5vw / 340 * 100);
+  height: calc(3.5vw / 340 * 100);
+  background: #E5E5E5;
+  border-radius: 50%;
+  margin: 0 calc(6vw / 340 * 100) 0 0;
+}
